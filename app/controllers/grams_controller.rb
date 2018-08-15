@@ -2,6 +2,10 @@ class GramsController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create]
 
   def show
+    @gram = Gram.find_by_id(params[:id])
+    if @gram.blank?
+      render plain: 'Not found :(', status: :not_found
+    end
   end
 
   def new
